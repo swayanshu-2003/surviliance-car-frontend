@@ -1,3 +1,8 @@
+// Disable rule for the entire file
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
+
+
 "use client";
 import React, { useEffect, useState } from "react";
 
@@ -5,12 +10,12 @@ const App = () => {
   const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:5900/");
+    const socket:any = new WebSocket("ws://64.227.154.38:5900/");
 
-    socket.onmessage = (event) => {
+    socket.onmessage = (event:any) => {
       console.log(event);
       if (event) {
-        const blob = new Blob([event?.data], { type: "image/jpeg" });
+        const blob:any = new Blob([event?.data], { type: "image/jpeg" });
         const url: any = URL.createObjectURL(blob);
         setImageSrc(url);
         return () => URL.revokeObjectURL(url);

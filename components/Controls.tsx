@@ -1,32 +1,33 @@
+// Disable rule for the entire file
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
+
 "use client";
 import Joystick from "rc-joystick";
 import { useState, useEffect } from "react";
 
 export default function Controls() {
   const [ws, setWs] = useState<WebSocket | null>(null);
-  const [randomNumbers, setRandomNumbers] = useState<number[]>([]);
-  const [controlCode, setControlCode] = useState<string>("0000");
+
+
 
   useEffect(() => {
     // Connect to WebSocket server
-    const socket = new WebSocket("ws://localhost:5800");
+    const socket = new WebSocket("ws://64.227.154.38:5800");
     socket.onopen = () => {
       console.log("Connected to WebSocket server");
       // Register as a frontend client
       socket.send(JSON.stringify({ type: "frontend" }));
     };
 
-    socket.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data);
-        if (data.type === "dummy") {
-          console.log(data?.payload);
-          setRandomNumbers(data.payload);
-        }
-      } catch (error: any) {
-        console.log(error);
-      }
-    };
+    // socket.onmessage = (event) => {
+    //   try {
+    //     const data = JSON.parse(event.data);
+        
+    //   } catch (error: any) {
+    //     console.log(error);
+    //   }
+    // };
 
     socket.onclose = () => {
       console.log("WebSocket connection closed");
@@ -44,18 +45,13 @@ export default function Controls() {
     console.log("code")
     console.log(code)
     if (ws && ws.readyState === WebSocket.OPEN) {
-      setControlCode(code);
       ws.send(JSON.stringify({ type: "control", controlCode: code }));
     }
   };
 
-  const handleButtonPress = (code: string) => {
-    sendControlCode(code);
-  };
 
-  const handleButtonRelease = () => {
-    sendControlCode("0000"); // Stop signal
-  };
+
+
   const onJoystickChange = (v: any) => {
     const dir: any = v?.direction;
     console.log(dir);

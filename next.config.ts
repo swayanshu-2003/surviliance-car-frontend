@@ -4,39 +4,6 @@ import withPWA from 'next-pwa';
 const nextConfig:any = {
   reactStrictMode: true,
 
-  // Existing image configuration
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "s3-alpha-sig.figma.com",
-      },
-      {
-        protocol: "https",
-        hostname: "img.freepik.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "nextjs.org",
-      },
-      {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-      },
-      {
-        protocol: "https",
-        hostname: "d3l4smlx4vuygm.cloudfront.net",
-      },
-      {
-        protocol: "https",
-        hostname: "media.theeverygirl.com",
-      },
-    ],
-  },
 
   // Add WebAssembly support
   webpack: (config:any, { isServer }:any) => {

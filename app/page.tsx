@@ -2,9 +2,7 @@
 
 import LiveCameraStream from "@/components/Cam";
 import Controls from "@/components/Controls";
-import Image from "next/image";
-import Joystick from "rc-joystick";
-import { useState } from "react";
+
 
 export default function Home() {
   return (
