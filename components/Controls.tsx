@@ -48,6 +48,13 @@ export default function Controls() {
       ws.send(JSON.stringify({ type: "control", controlCode: code }));
     }
   };
+  const sendPanTiltCode = (code: string) => {
+    console.log("code")
+    console.log(code)
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ type: "pan-tilt", panTilt: code }));
+    }
+  };
 
 
 
@@ -70,6 +77,26 @@ export default function Controls() {
         break;
       default:
         sendControlCode("0000");
+    }
+  };
+  const onPantiltChange = (v: any) => {
+    const dir: any = v?.direction;
+    console.log(dir);
+    switch (dir) {
+      case "Right":
+        sendPanTiltCode("4");
+        break;
+      case "Left":
+        sendPanTiltCode("3");
+        break;
+      case "Top":
+        sendPanTiltCode("1");
+        break;
+      case "Bottom":
+        sendPanTiltCode("2");
+        break;
+      default:
+        sendPanTiltCode("0000");
     }
   };
 

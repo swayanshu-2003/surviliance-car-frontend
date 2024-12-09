@@ -10,7 +10,7 @@ const App = () => {
   const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
-    const socket:any = new WebSocket("ws://64.227.154.38:5900/");
+    const socket:any = new WebSocket("ws://192.168.68.1:5900/");
 
     socket.onmessage = (event:any) => {
       console.log(event);
